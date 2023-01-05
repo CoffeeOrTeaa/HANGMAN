@@ -52,7 +52,8 @@ int main()
         cout << "Bitte waehle den Spielmodus aus" << endl <<
             " 1. Spieler gegen Spieler" << endl <<
             " 2. Spieler gegen PC" << endl <<
-            " 3. Auswahl stoppen" << endl;
+            " 3. Fuege Woerter der Wort-Bibliothek hinzu" << endl <<
+            " 4. Auswahl stoppen" << endl;
 
 
         cin >> gamemode;
@@ -88,9 +89,10 @@ int main()
 
             case 3:
                 system("cls");
-                cout << " adde wort " << endl;
-                add();
-
+                
+                
+                    addLib();
+               
 
 
                 break;
