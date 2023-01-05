@@ -14,7 +14,6 @@
 #include <windows.h>
 #include "Library.h"
 #include "PlayerVsPlayer.h"
-#include <limits>
 using namespace std;
 
 
@@ -91,7 +90,7 @@ int main()
                 system("cls");
                 
                 
-                    addLib();
+                    AddLib();
                
 
 

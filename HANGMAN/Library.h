@@ -3,16 +3,21 @@
 
 #include <string>
 #include <iostream>
-#include <fstream>
-#include <cstring>
-#include <cctype>
+#include <fstream>																												// source: https://cplusplus.com/reference/fstream/fstream/
+#include <cctype>																												// source: https://cplusplus.com/reference/locale/tolower/
 
 
 using namespace std;
 
-void addLib() {
+void AddLib() {
 	ofstream lib;
-	lib.open("Library.txt");
+
+
+
+	lib.open("Library.txt", ios_base::app);																						//openmode des Dokuments wirde ueber ios_base definiert. Das wurde gewaehlt um nicht immer eine neue Library erzeugen zu muessen, aussserdem kann man so woerter auch direkt ueber die .txt Datei hinzufuegen ohne das sie geloescht werden source: https://cplusplus.com/reference/ios/ios_base/openmode/
+	
+
+
 	if (lib.is_open()) {
 
 		
@@ -27,7 +32,7 @@ void addLib() {
 		do {
 			cout << " Tippe das hinzuzufuegende Wort ein. " << endl << " Gebe '!' ein um die eingabe abzubrechen" << endl;
 
-			i++;
+			
 
 			cin >> word;																										//einlesen von Word
 			if (word == "!") {																									//wenn word ! dann soll die while eingabe abgebrochen werden -> verhindern von dem abspeichern von !, das als abbruchsbedingung gesetzt wurde
@@ -60,15 +65,23 @@ void addLib() {
 		cin.ignore();																											// Kurz stoppen
 	
 		
-
+		
+		cin.ignore();
 		lib.close();
 
 	}
 	else
-		cout << "Datei konnte nicht geoeffnet werden. Breche den Prozess ab..." << endl;
-
+		cout << "Datei konnte nicht geoeffnet werden. Breche den Prozess ab... Ooops that shouldnt have happened" << endl;
+		
 }
 
+
+void ReadLib(int num) {
+
+
+
+
+}
 
 	
 
