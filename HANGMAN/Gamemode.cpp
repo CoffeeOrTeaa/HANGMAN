@@ -44,7 +44,7 @@ int main()
 
    
 
-
+    int num = 2;
     int gamemode;
 
     do {
@@ -88,10 +88,11 @@ int main()
 
             case 3:
                 system("cls");
+             
                 
-                
-                    AddLib();
-               
+                   // AddLib();                 //done
+                ReadLib(num);                   //working on it
+                    
 
 
                 break;

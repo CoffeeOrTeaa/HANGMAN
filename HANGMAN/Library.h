@@ -9,12 +9,19 @@
 
 using namespace std;
 
-void AddLib() {
+
+
+
+
+
+
+//done 
+void AddLib() {																													//DONE!
 	ofstream lib;
 
 
 
-	lib.open("Library.txt", ios_base::app);																						//openmode des Dokuments wirde ueber ios_base definiert. Das wurde gewaehlt um nicht immer eine neue Library erzeugen zu muessen, aussserdem kann man so woerter auch direkt ueber die .txt Datei hinzufuegen ohne das sie geloescht werden source: https://cplusplus.com/reference/ios/ios_base/openmode/
+	lib.open("Library.txt", ios_base::app);																						//openmode des Dokuments wirde ueber ios_base definiert. app wurde gewaehlt um nicht immer eine neue Library erzeugen zu muessen, aussserdem kann man so woerter auch direkt ueber die .txt Datei hinzufuegen ohne das sie geloescht werden source: https://cplusplus.com/reference/ios/ios_base/openmode/
 	
 
 
@@ -52,7 +59,7 @@ void AddLib() {
 
 
 		
-			lib << i <<". " << word << endl;																					//abspeicherung des Wortes mit einer Nummerierung um das auswaehlen des Worts an der Zahl fest machen zu koennen
+			lib <<  word << endl;																					//abspeicherung des Wortes mit einer Nummerierung um das auswaehlen des Worts an der Zahl fest machen zu koennen
 
 
 			
@@ -73,13 +80,49 @@ void AddLib() {
 	else
 		cout << "Datei konnte nicht geoeffnet werden. Breche den Prozess ab... Ooops that shouldnt have happened" << endl;
 		
-}
+}																											//done!
 
-
+//working it out
 void ReadLib(int num) {
+	ifstream is("Library.txt");
+	int row = 0;
+	int col = 0;
+	
+	char out;
+	char* all = new char[100*100];
+	
 
 
+	while (is.get(out)) {
 
+
+		all[row*col] = out;
+
+
+		if (all[row*col] = ' ') {
+			col++;
+			row = 0;
+		}
+
+			//cout << out;
+			row++;
+	}
+	
+	
+	
+
+
+	//char c;										//openmode des Dokuments wirde ueber ios_base definiert. Out wurde gewaehlt um nur das lesen moeglich zu machen, um versehentliches schreiben/ueberschreiben zu verhindern.// source: https://cplusplus.com/reference/ios/ios_base/openmode/
+	//while (is.get(c))          // loop getting single characters
+	//	cout << c;
+	
+	
+	
+	
+	/*
+	istream& get (char* i,  streamsize 100);
+	*/
+	
 
 }
 
