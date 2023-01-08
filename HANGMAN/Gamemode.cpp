@@ -42,9 +42,8 @@ int main()
 
     system("cls");                      //cleared den Screen
 
-   
+    string tstwrd;
 
-    int num = 2;
     int gamemode;
 
     do {
@@ -60,7 +59,7 @@ int main()
         {
             cin.clear();
             cin.ignore((numeric_limits<streamsize>::max)(), '\n');
-            cerr << "Oops, that input is invalid.  Please try again.\n";
+            cerr << " Oops Benutze bitte nur korrespondierende Zahlen in diesem Menu" << endl;
         }
         else
         {
@@ -73,6 +72,9 @@ int main()
             case 1:
                 system("cls");
                 cout << "1 debug" << endl;
+                
+
+
 
 
 
@@ -89,9 +91,8 @@ int main()
             case 3:
                 system("cls");
              
-                
-                   // AddLib();                 //done
-                ReadLib(num);                   //working on it
+                IntLib();
+                  
                     
 
 
@@ -104,6 +105,24 @@ int main()
 
 
 
+           
+            //case um funktionen zu testen
+           case 6:
+                cout << "hier wird getestet" << endl;
+
+               
+                tstwrd = "@";
+
+               if(AlphTest(tstwrd,tstwrd.length())== true)
+                cout << "zahl enthalten" << endl;
+               else
+                cout << "Zahl nicht enthalten" << endl;
+                
+               
+               
+               break;
+            
+            
             default:
                 system("cls");
                 cout << "Ungueltige Eingabe, bitte Versuche es erneut" << endl;
