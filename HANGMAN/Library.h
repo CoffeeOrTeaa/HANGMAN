@@ -3,9 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include <fstream>																												// source: https://cplusplus.com/reference/fstream/fstream/
-#include <cctype>																												// source: https://cplusplus.com/reference/locale/tolower/
-
+#include <fstream>		 	// source: https://cplusplus.com/reference/fstream/fstream/
+#include <cctype>           // source: https://cplusplus.com/reference/locale/tolower/
+#include <vector>			// source: https://cplusplus.com/reference/vector/vector/
 
 using namespace std;
 
@@ -15,7 +15,7 @@ using namespace std;
 //Prueft ob eine Zahl im Wort ist, koennen nicht auf ' ' testen, da space auch eine bestaetigung bei cin ist 
 
 //done 08,01
-bool AlphTest(string word,int wlength) {
+bool IsNotAlph(string word,int wlength) {
 
 	
 	
@@ -36,6 +36,22 @@ bool AlphTest(string word,int wlength) {
 
 	return false;
 };
+
+
+
+// working on it																						!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+bool IsExistWord(string word) {
+
+
+	cout << " Dieses Wort existiert schon!" << endl;
+
+
+
+	return false;
+}
+
+
+
 
 
 
@@ -86,7 +102,7 @@ void AddLib() {																													//DONE!
 
 				
 				
-				if (AlphTest(word,word.length())==true)                                                                                   //NumTestet auf nummern, und so wird entschieden ob der cin komplett gecleared werden muss oder nur der Buffer entleert. 
+				if (IsNotAlph(word,word.length())==true)                                                                                   //NumTestet auf nummern, und so wird entschieden ob der cin komplett gecleared werden muss oder nur der Buffer entleert. 
 				{
 					cin.clear(); // macht error flag weg, wenn die Flag auf falschs steh dann funktioniert cin nicht mehr richtig
 					cin.ignore((numeric_limits<streamsize>::max)(), '\n'); // macht den buffer frei
@@ -103,8 +119,8 @@ void AddLib() {																													//DONE!
 					
 				}
 
-
-
+				if (IsExistWord(word) == true)
+					break;
 			
 
 
@@ -139,58 +155,73 @@ void AddLib() {																													//DONE!
 		
 }																											//done!
 
-//working it out
-/*void ReadLib(int num) {
-	ifstream is("Library.txt");
-	int row = 0;
-	int col = 0;
-	
-	char out;
-	char* all = new char[100*100];
+
+string SetWordOnlineFast(char* buffer, int size) { //Staffel 2
+
+	char* buf = buffer;
 	
 
 
-	while (is.get(out)) {
+	for (int i = 0; i < size; i++) {
+		
 
 
-		all[row*col] = out;
 
-
-		if (all[row*col] = ' ') {
-			col++;
-			row = 0;
-		}
-
-			//cout << out;
-			row++;
 	}
+
 	
-	
+	return string{};
+
+}
+
+
+
+
+//working it out
+void ReadLibOnlineFast() { //anspielung auf Netflix serie
+	ifstream opLib("Library.txt");
+						   
+															//source: https://cplusplus.com/reference/vector/vector/
+	vector<string> word;	
+															//source: https://cplusplus.com/reference/istream/istream/seekg/
+															//an das ende der Lib gehen
+	opLib.seekg(0, opLib.end);		
+															//position des arrays ausgeben -> da wie am ende der lib sind wird die groesse angegeben
+	int Libend = opLib.tellg();
+	cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
+	opLib.seekg(0, opLib.beg);									
+	word.resize(Libend);									//vector groesse anpassen
+	char* buffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
+
+	opLib.read(buffer, Libend);								//fuellen des zwischenspeichers
 	
 
 
-	//char c;										//openmode des Dokuments wirde ueber ios_base definiert. Out wurde gewaehlt um nur das lesen moeglich zu machen, um versehentliches schreiben/ueberschreiben zu verhindern.// source: https://cplusplus.com/reference/ios/ios_base/openmode/
-	//while (is.get(c))          // loop getting single characters
-	//	cout << c;
-	
-	
-	
-	
-	/*
-	istream& get (char* i,  streamsize 100);
 
-	
+															//ausgabe der Liste (Debug)
+	//for (int i = 0; i < Libend; i++)
+		//cout << buffer[i];
 
-}*/
+
+
+
+	opLib.close();
+}
+
+
+
+
 
 
 
 
 //working on it,? 08,01
 void PrintLib() {
-	ifstream lib("Library.txt");
+	ifstream lib("Library.txt");		//oeffnen von Library
 	char word;
 	int num=0;
+
+
 	while (lib.get(word)) {
 		
 		
@@ -293,6 +324,25 @@ void IntLib() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

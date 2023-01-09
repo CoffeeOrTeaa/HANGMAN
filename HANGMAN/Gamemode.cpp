@@ -14,6 +14,7 @@
 #include <windows.h>
 #include "Library.h"
 #include "PlayerVsPlayer.h"
+#include "PlayFunc.h"
 using namespace std;
 
 
@@ -47,7 +48,7 @@ int main()
     int gamemode;
 
     do {
-        cout << "Bitte waehle den Spielmodus aus" << endl <<
+        cout << endl << "Bitte waehle den Spielmodus aus" << endl <<
             " 1. Spieler gegen Spieler" << endl <<
             " 2. Spieler gegen PC" << endl <<
             " 3. Fuege Woerter der Wort-Bibliothek hinzu" << endl <<
@@ -109,9 +110,21 @@ int main()
             //case um funktionen zu testen
            case 6:
                 cout << "hier wird getestet" << endl;
-
+              
+                ReadLibOnlineFast();
+                
+                
+                
+                
+                /*  cin.ignore();
                
-                tstwrd = "@";
+                for (int i = 0; i < 10; i++)
+                    HangPic(i);
+
+                    
+                */
+
+              /*  tstwrd = "@";
 
                if(AlphTest(tstwrd,tstwrd.length())== true)
                 cout << "zahl enthalten" << endl;
@@ -122,14 +135,14 @@ int main()
                
                break;
             
-            
+            */
             default:
                 system("cls");
                 cout << "Ungueltige Eingabe, bitte Versuche es erneut" << endl;
 
 
                 break;
-
+               
             }
             
 
