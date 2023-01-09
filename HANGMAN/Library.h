@@ -43,7 +43,7 @@ bool IsNotAlph(string word,int wlength) {
 bool IsExistWord(string word) {
 
 
-	cout << " Dieses Wort existiert schon!" << endl;
+	cout << " Pruefe!" << endl;
 
 
 
@@ -102,13 +102,13 @@ void AddLib() {																													//DONE!
 
 				
 				
-				if (IsNotAlph(word,word.length())==true)                                                                                   //NumTestet auf nummern, und so wird entschieden ob der cin komplett gecleared werden muss oder nur der Buffer entleert. 
+				if (IsNotAlph(word,word.length())==true || IsExistWord(word) == true)                                                                                   //NumTestet auf nummern, und so wird entschieden ob der cin komplett gecleared werden muss oder nur der Buffer entleert. 
 				{
 					cin.clear(); // macht error flag weg, wenn die Flag auf falschs steh dann funktioniert cin nicht mehr richtig
 					cin.ignore((numeric_limits<streamsize>::max)(), '\n'); // macht den buffer frei
 					cerr << " Oops Benutze bitte keine Zahlen in diesem Menu. Druecke Enter um fortzufahren..." << endl;
 					cin.ignore();
-					break;
+					
 
 					
 				}
@@ -117,10 +117,12 @@ void AddLib() {																													//DONE!
 					//cleared buffer zur sicherheit
 					cin.ignore((numeric_limits<streamsize>::max)(), '\n');// macht den buffer frei
 					
+					lib << word << endl;																					//abspeicherung des Wortes mit einer Nummerierung um das auswaehlen des Worts an der Zahl fest machen zu koennen
+
+
+
 				}
 
-				if (IsExistWord(word) == true)
-					break;
 			
 
 
@@ -131,7 +133,6 @@ void AddLib() {																													//DONE!
 
 
 		
-			lib <<  word << endl;																					//abspeicherung des Wortes mit einer Nummerierung um das auswaehlen des Worts an der Zahl fest machen zu koennen
 
 
 
