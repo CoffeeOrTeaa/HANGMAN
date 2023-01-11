@@ -41,12 +41,16 @@ int main()
     cin.ignore();
 
 
+
+
     system("cls");                      //cleared den Screen
 
-    string tstwrd;
 
+
+    
+    
+    
     int gamemode;
-
     do {
         cout << endl << "Bitte waehle den Spielmodus aus" << endl <<
             " 1. Spieler gegen Spieler" << endl <<
@@ -111,8 +115,14 @@ int main()
            case 6:
                 cout << "hier wird getestet" << endl;
               
-                ReadLibOnlineFast();
-                
+
+
+                //cout << " bei 1 ist eine zahl drinne" << IsNotAlph("w9rt", 4);
+
+               
+
+               cout <<  ReadLibOnlineFast(4);
+               // GetWordOnlineFast(hallo, 4);
                 
                 
                 
@@ -124,18 +134,18 @@ int main()
                     
                 */
 
-              /*  tstwrd = "@";
+               //tstwrd = "WOe4";
 
-               if(AlphTest(tstwrd,tstwrd.length())== true)
-                cout << "zahl enthalten" << endl;
+              /* if (IsNotAlph(tstwrd, tstwrd.length()) == true)
+                cout << "pzahl enthalten" << endl;
                else
                 cout << "Zahl nicht enthalten" << endl;
+                */
+               
                 
-               
-               
                break;
             
-            */
+            
             default:
                 system("cls");
                 cout << "Ungueltige Eingabe, bitte Versuche es erneut" << endl;

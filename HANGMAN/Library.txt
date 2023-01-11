@@ -20,7 +20,4 @@ okay
 tiger
 arte
 flasche
-1
-2
-3
 kirsche

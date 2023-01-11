@@ -5,7 +5,6 @@
 #include <iostream>
 #include <fstream>		 	// source: https://cplusplus.com/reference/fstream/fstream/
 #include <cctype>           // source: https://cplusplus.com/reference/locale/tolower/
-#include <vector>			// source: https://cplusplus.com/reference/vector/vector/
 
 using namespace std;
 
@@ -16,22 +15,27 @@ using namespace std;
 
 //done 08,01
 bool IsNotAlph(string word,int wlength) {
-
+	
 	
 	
 
 	for (int i = 0; i < wlength; i++) {
-
+		
 	
-		if (isalpha(word[i]) == false)
+		
+		
+
+
+		if (!( 'a' <= word[i] && word[i] <= 'z') && !('A' <= word[i] && word[i] <= 'Z'))
 		{
+
 			cerr << " Nummern sind in Woertern nicht erlaubt... Warum tust du das?" << endl << " Dein Wort lautet:" << word << endl;
 			
 			return true;
 
 		}
 	
-
+	
 	}
 
 	return false;
@@ -117,7 +121,7 @@ void AddLib() {																													//DONE!
 					//cleared buffer zur sicherheit
 					cin.ignore((numeric_limits<streamsize>::max)(), '\n');// macht den buffer frei
 					
-					lib << word << endl;																					//abspeicherung des Wortes mit einer Nummerierung um das auswaehlen des Worts an der Zahl fest machen zu koennen
+					lib << word << endl;																					//abspeicherung des Wortes 
 
 
 
@@ -157,56 +161,65 @@ void AddLib() {																													//DONE!
 }																											//done!
 
 
-string SetWordOnlineFast(char* buffer, int size) { //Staffel 2
-
-	char* buf = buffer;
-	
-
-
-	for (int i = 0; i < size; i++) {
-		
-
-
-
-	}
-
-	
-	return string{};
-
-}
-
 
 
 
 //working it out
-void ReadLibOnlineFast() { //anspielung auf Netflix serie
+string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
 	ifstream opLib("Library.txt");
 						   
-															//source: https://cplusplus.com/reference/vector/vector/
-	vector<string> word;	
-															//source: https://cplusplus.com/reference/istream/istream/seekg/
 															//an das ende der Lib gehen
 	opLib.seekg(0, opLib.end);		
 															//position des arrays ausgeben -> da wie am ende der lib sind wird die groesse angegeben
 	int Libend = opLib.tellg();
+	
 	cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
-	opLib.seekg(0, opLib.beg);									
-	word.resize(Libend);									//vector groesse anpassen
+	opLib.seekg(0, opLib.beg);		
+	
+	char* word = new char[Libend];							//source: https://cplusplus.com/reference/istream/istream/seekg/
+
 	char* buffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
 
 	opLib.read(buffer, Libend);								//fuellen des zwischenspeichers
 	
 
+	int i = 0;
+	int row=0;
+	
+	while (buffer[i] != NULL) {
+		if (buffer[i] == '\n')
+			row++;
+		i++;
 
+	}
+	cout <<endl << row; //Anzahl der Woerter
+	 
+	const int _row = row;			// row als konstante setzen
+	
+	string* allwords = new string [_row];		//string array mit der groessse von der anzahl der reihen
+	
+	const char beg = buffer[i];
+	
+	i = 0;
+	while (buffer[i] != '\n' ) {//pruefen bis wohin noch char ausgegeben werden
+		buffer = buffer++;
+		cout << buffer++ << endl;
+								//naechsten char einlesen und im pointer speichern
 
-															//ausgabe der Liste (Debug)
-	//for (int i = 0; i < Libend; i++)
-		//cout << buffer[i];
+		allwords[i] = buffer;	//alle chars zwischen anfang und ende von der Liste, die im pointer gespeichert wurden als string ausgeben
+	}
 
+	for( int j =0 ; j<_row-1;j++)
+	cout << allwords[j] ;
+		//ausgabe der Liste (Debug)
+	/*for (int i = 0; i < Libend; i++)
+		cout << buffer[i];*/
 
+	
 
 
 	opLib.close();
+	return allwords[num];
 }
 
 
