@@ -91,7 +91,7 @@ int GetLibraryWordAmount() {
 
 
 //Done 12.01
-string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
+string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 	ifstream opLib("Library.txt");
 
 	//an das ende der Lib gehen
@@ -169,13 +169,16 @@ string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
 // working on it																						!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 bool IsExistWord(string word) {
 
-	ifstream opLib("Library.txt");
-	
+	int sizeLib = GetLibraryWordAmount();
+	string* allw = new string[sizeLib];
+
+	for (int i = 0; i < sizeLib; i++)
+		allw[i] = PrintLibOnlineFast(i);
 
 
 
-	for (int i = 0; i < GetLibraryWordAmount(); i++) {
-		if (word == ReadLibOnlineFast(i)) {
+	for (int i = 0; i < sizeLib; i++) {
+		if (word == allw[i]) {
 			return true;
 		}
 		
@@ -188,7 +191,7 @@ bool IsExistWord(string word) {
 
 
 //Add to Lib //done 08,01
-void AddLib() {																													//DONE!
+void AddToLib() {																													//DONE!
 	ofstream lib;
 
 
@@ -285,7 +288,71 @@ void AddLib() {																													//DONE!
 		
 }																											//done!
 
+void deleteWord( ) {
+	string wdel; //das zu loeschende Wort
+	
 
+	int _sizeLib = GetLibraryWordAmount();
+
+	string* allw = new string[_sizeLib];
+
+	for (int i = 0; i < _sizeLib; i++)
+		allw[i] = PrintLibOnlineFast(i);
+
+	
+	
+	cout << "Gebe das zu loeschende Wort ein: " << endl;
+	cin >> wdel;
+	
+	//wdel in lowercase aendern
+
+	for(int i =0 ; i < wdel.length() ; i++)
+		wdel[i] = tolower(wdel[i]);
+
+
+	//erst pruefen ob das Wort existiert
+	if (IsExistWord(wdel) == true) {
+
+		//buffer mit der Groesse der Wortanzahl erstellen
+		string* buffer = new string[_sizeLib];
+		int j=0;
+
+		for (int i = 0; i < _sizeLib; i++) {
+
+			//alle woerter durchgehen bis uebereinstimmung gefunden ist
+			if (wdel != allw[i]) {
+
+				buffer[j] = allw[i];
+				
+			}
+
+			
+
+			
+			
+
+
+
+
+		}
+		
+		
+		
+
+			ofstream opLib("Library.txt");
+			for (int i = 0; i < _sizeLib; i++)
+				opLib << buffer[i] << endl;
+		
+			opLib.close();
+			
+			
+	}
+	
+
+	else
+		cout << " Dieses Wort ist nicht in der Wort Library..." << endl;
+		
+}
 
 
 
@@ -303,6 +370,9 @@ void IntLib() {
 
 	int mode;
 
+	int sizeLib;
+	string* allwords;
+	
 
 	do {
 		cout << " Waehlen sie ihre Option aus: " << endl
@@ -334,25 +404,38 @@ void IntLib() {
 		switch (mode) {
 
 		case 1://Lib Anzeigen
-			system("cls"); //wort lib
-			//cout << "1 debug" << endl;
-			//cin.ignore();
-			ReadLibOnlineFast(4);
+			
+			sizeLib = GetLibraryWordAmount();
+			allwords = new string[sizeLib];
+		
+			for (int i = 0; i < sizeLib; i++)
+				allwords[i] = PrintLibOnlineFast(i);
 
+			system("cls"); 
+
+			cout << "Zeige Inhalt der Wort-Bibliothek" << endl << endl;
+
+			for(int i =0; i< sizeLib; i++)
+				cout << i << ". "<< allwords[i] << endl;
+			
+			
+			cout << " Druecke Enter um Fortzufahren.." << endl;
+			cin.ignore();
 
 
 			break;
 
-		case 2://WORT HINZU
+		case 2://WortHinzufuegen
 			system("cls");
-			AddLib();
+			AddToLib();
 
 			//cout << "2 funyt" << endl;
 			
 			break;
 
-		case 3:
+		case 3:// wort entfernen
 			system("cls");
+			deleteWord();
 
 
 		             

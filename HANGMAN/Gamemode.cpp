@@ -55,7 +55,7 @@ int main()
         cout << endl << "Bitte waehle den Spielmodus aus" << endl <<
             " 1. Spieler gegen Spieler" << endl <<
             " 2. Spieler gegen PC" << endl <<
-            " 3. Fuege Woerter der Wort-Bibliothek hinzu" << endl <<
+            " 3. Greife auf die Wort-Bibliothek zu" << endl <<
             " 4. Auswahl stoppen" << endl;
 
 
@@ -114,8 +114,9 @@ int main()
             //case um funktionen zu testen
            case 6:
                 cout << "hier wird getestet" << endl;
+               //cout <<  IsExistWord("nein");
+                //deleteWord();
               
-               
                break;
             
             
