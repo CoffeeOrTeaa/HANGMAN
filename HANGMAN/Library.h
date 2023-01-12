@@ -42,16 +42,7 @@ bool IsNotAlph(string word,int wlength) {
 
 
 
-// working on it																						!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-bool IsExistWord(string word) {
 
-
-	cout << " Pruefe!" << endl;
-
-
-
-	return false;
-}
 
 
 char tolower(char BigL) {
@@ -64,6 +55,136 @@ char tolower(char BigL) {
 	return BigL;
 }
 
+
+int GetLibraryWordAmount() {
+	ifstream opLib("Library.txt");
+
+	//an das ende der Lib gehen
+	opLib.seekg(0, opLib.end);
+	//position des arrays ausgeben -> da wie am ende der lib sind wird die groesse angegeben
+	int Libend = opLib.tellg();
+
+	//cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
+	opLib.seekg(0, opLib.beg);
+
+	char* word = new char[Libend];							//source: https://cplusplus.com/reference/istream/istream/seekg/
+
+	char* buffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
+
+	opLib.read(buffer, Libend);								//fuellen des zwischenspeichers
+
+
+	int i = 0;
+	int row = 0;
+
+	//zaehlt anzahl der Woerter
+	while (buffer[i] != NULL) {
+		if (buffer[i] == '\n')
+			row++;
+		i++;
+
+	}
+	//cout <<endl << row; //Anzahl der Woerter
+	
+	return row;
+}
+
+
+//Done 12.01
+string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
+	ifstream opLib("Library.txt");
+
+	//an das ende der Lib gehen
+	opLib.seekg(0, opLib.end);
+	//position des arrays ausgeben -> da wie am ende der lib sind wird die groesse angegeben
+	int Libend = opLib.tellg();
+
+	//cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
+	opLib.seekg(0, opLib.beg);
+
+	char* word = new char[Libend];							//source: https://cplusplus.com/reference/istream/istream/seekg/
+
+	char* buffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
+
+	opLib.read(buffer, Libend);								//fuellen des zwischenspeichers
+
+	
+															//gibt anzahl der Woerter aus
+	int row = GetLibraryWordAmount();
+	
+
+	
+
+	
+
+	string* allwords = new string[row];		//string array mit der groessse von der anzahl der reihen
+
+
+
+
+	int placeInDoc = 0;//Platz im Dokument
+	int sizeOfWord = 0;//laenge des Wortes
+
+	int allnum = 0;
+	do {//pruefen bis wohin noch char ausgegeben werden
+
+		if (buffer[placeInDoc] == '\n') {
+
+
+
+
+			char* _buffer = new char[sizeOfWord];				//groessse vom Wort zwischenspeicher anpassen auf wort laenge
+
+
+			for (int x = 0; x < sizeOfWord; x++) {
+				_buffer[x] = buffer[placeInDoc - sizeOfWord + x];
+			}
+
+			_buffer[sizeOfWord] = NULL;
+
+			allwords[allnum] = string{ _buffer };				//Speicher alle chars im _buffer als String in allwords ab.
+			sizeOfWord = -1;											// zurueck setzen der Wortlaenge, um von vorne wieder hochzaehlen zu koennen
+
+			//cout <<allwords[allnum] << endl; //moegliche ausgabe des gerade gespeicherten wortes
+			allnum++;
+
+		}
+
+		sizeOfWord++;		//hochzaehlen der groesse der Woerter			
+		placeInDoc++;	//naechster platz im dokument
+		//cout << endl << size;
+	} while (buffer[placeInDoc] != NULL);
+	;
+	//ausgabe der Liste (Debug)
+/*for (int i = 0; i < Libend; i++)
+	cout << buffer[i];*/
+
+
+
+
+	opLib.close();
+	return allwords[num];
+}
+
+// working on it																						!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+bool IsExistWord(string word) {
+
+	ifstream opLib("Library.txt");
+	
+
+
+
+	for (int i = 0; i < GetLibraryWordAmount(); i++) {
+		if (word == ReadLibOnlineFast(i)) {
+			return true;
+		}
+		
+	}
+
+	
+
+	return false;
+}
 
 
 //Add to Lib //done 08,01
@@ -167,86 +288,6 @@ void AddLib() {																													//DONE!
 
 
 
-
-//working it out
-string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
-	ifstream opLib("Library.txt");
-						   
-															//an das ende der Lib gehen
-	opLib.seekg(0, opLib.end);		
-															//position des arrays ausgeben -> da wie am ende der lib sind wird die groesse angegeben
-	int Libend = opLib.tellg();
-	
-	//cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
-	opLib.seekg(0, opLib.beg);		
-	
-	char* word = new char[Libend];							//source: https://cplusplus.com/reference/istream/istream/seekg/
-
-	char* buffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
-
-	opLib.read(buffer, Libend);								//fuellen des zwischenspeichers
-	
-
-	int i = 0;
-	int row=0;
-	
-	while (buffer[i] != NULL) {
-		if (buffer[i] == '\n')
-			row++;
-		i++;
-
-	}
-	//cout <<endl << row; //Anzahl der Woerter
-	 
-	
-	string* allwords = new string [row];		//string array mit der groessse von der anzahl der reihen
-	
-	
-	
-
-	int placeInDoc = 0;//Platz im Dokument
-	int sizeOfWord=0;//laenge des Wortes
-	
-	int allnum = 0;
-	do {//pruefen bis wohin noch char ausgegeben werden
-		
-		if (buffer[placeInDoc] == '\n') {
-			
-
-			
-			
-			char* _buffer = new char[sizeOfWord];				//groessse vom Wort zwischenspeicher anpassen auf wort laenge
-
-
-			for (int x = 0; x < sizeOfWord; x++) {
-				_buffer[x] = buffer[placeInDoc - sizeOfWord + x];
-			}
-
-			_buffer[sizeOfWord] = NULL;
-
-			allwords[allnum] = string{ _buffer };				//Speicher alle chars im _buffer als String in allwords ab.
-			sizeOfWord = -1;											// zurueck setzen der Wortlaenge, um von vorne wieder hochzaehlen zu koennen
-
-			//cout <<allwords[allnum] << endl; //moegliche ausgabe des gerade gespeicherten wortes
-			allnum++;
-			
-		}
-		
-		    sizeOfWord++;		//hochzaehlen der groesse der Woerter			
-			placeInDoc++;	//naechster platz im dokument
-			//cout << endl << size;
-	} while (buffer[placeInDoc] != NULL);
-;
-		//ausgabe der Liste (Debug)
-	/*for (int i = 0; i < Libend; i++)
-		cout << buffer[i];*/
-
-	
-
-
-	opLib.close();
-	return allwords[num];
-}
 
 
 

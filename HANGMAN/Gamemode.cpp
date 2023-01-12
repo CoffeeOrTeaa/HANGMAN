@@ -115,36 +115,7 @@ int main()
            case 6:
                 cout << "hier wird getestet" << endl;
               
-
-               // cout << int('a');
-               // cout << tolower('A');
-
-                //cout << " bei 1 ist eine zahl drinne" << IsNotAlph("w9rt", 4);
-
                
-
-               //cout <<  ReadLibOnlineFast(10);
-              
-                
-                
-                
-                /*  cin.ignore();
-               
-                for (int i = 0; i < 10; i++)
-                    HangPic(i);
-
-                    
-                */
-
-               //tstwrd = "WOe4";
-
-              /* if (IsNotAlph(tstwrd, tstwrd.length()) == true)
-                cout << "pzahl enthalten" << endl;
-               else
-                cout << "Zahl nicht enthalten" << endl;
-                */
-               
-                
                break;
             
             

@@ -26,3 +26,5 @@ universitaet
 Frau
 galgenmaennchen
 lass
+nein
+kaffee
