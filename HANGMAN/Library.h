@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>		 	// source: https://cplusplus.com/reference/fstream/fstream/
-#include <cctype>           // source: https://cplusplus.com/reference/locale/tolower/
+         // source: https://cplusplus.com/reference/locale/tolower/
 
 using namespace std;
 
@@ -54,7 +54,15 @@ bool IsExistWord(string word) {
 }
 
 
+char tolower(char BigL) {
 
+	if (!('a' <= BigL && BigL <= 'z')) {
+		BigL = BigL +  ('z' - 'Z');
+
+	}
+
+	return BigL;
+}
 
 
 
@@ -87,15 +95,6 @@ void AddLib() {																													//DONE!
 			cin >> word;
 			
 
-			for (int j = 0; j < word.length(); j++) {																				//das  Wort soll nur in lower case gespeichert werden. Deshalb wird jeder buchstabe um string durchgegangen um ihn zu testen ung ggbf zu konvertieren
-
-				word[j] = tolower(word[j]);																						//tolower ist eine funktion aus der lib cctype. Man haette es mit ascii code loesen koennen aber das ist eleganter
-																																//source https://cplusplus.com/reference/locale/tolower/
-
-			}
-
-			//cout << word;
-
 
 			if (word == "!") {																									//wenn word ! dann soll die while eingabe abgebrochen werden -> verhindern von dem abspeichern von !, das als abbruchsbedingung gesetzt wurde
 
@@ -120,6 +119,12 @@ void AddLib() {																													//DONE!
 					//cleared buffer zur sicherheit
 					cin.ignore((numeric_limits<streamsize>::max)(), '\n');// macht den buffer frei
 					
+					for (int j = 0; j < word.length(); j++) {																				//das  Wort soll nur in lower case gespeichert werden. Deshalb wird jeder buchstabe um string durchgegangen um ihn zu testen ung ggbf zu konvertieren
+
+						word[j] = tolower(word[j]);																						//tolower ist eine funktion aus der lib cctype. Man haette es mit ascii code loesen koennen aber das ist eleganter
+																																		//source https://cplusplus.com/reference/locale/tolower/
+
+					}
 					lib << word << endl;																					//abspeicherung des Wortes 
 
 
@@ -127,7 +132,7 @@ void AddLib() {																													//DONE!
 				}
 
 			
-
+				
 
 
 			

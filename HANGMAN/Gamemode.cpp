@@ -116,12 +116,14 @@ int main()
                 cout << "hier wird getestet" << endl;
               
 
+               // cout << int('a');
+               // cout << tolower('A');
 
                 //cout << " bei 1 ist eine zahl drinne" << IsNotAlph("w9rt", 4);
 
                
 
-               cout <<  ReadLibOnlineFast(10);
+               //cout <<  ReadLibOnlineFast(10);
               
                 
                 

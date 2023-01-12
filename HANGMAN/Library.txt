@@ -22,3 +22,7 @@ tiger
 arte
 flasche
 kirsche
+universitaet
+Frau
+galgenmaennchen
+lass
