@@ -10,7 +10,6 @@ using namespace std;
 
 
 
-
 //Prueft ob eine Zahl im Wort ist, koennen nicht auf ' ' testen, da space auch eine bestaetigung bei cin ist 
 
 //done 08,01
@@ -160,7 +159,26 @@ void AddLib() {																													//DONE!
 		
 }																											//done!
 
+string CharToString( int beg, char* buffer,int size) {
+int sizebuf = size;
 
+	char _buffer[size];
+	cout << '\n' << beg;
+	
+	int i = 0;
+	do {
+		_buffer[i] = buffer[beg];
+
+		i++;
+		beg++;
+
+	} while (buffer[beg] != '\n');
+		
+	cout << _buffer << endl << endl;
+	
+
+	return string{ buffer };
+}
 
 
 
@@ -173,7 +191,7 @@ string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
 															//position des arrays ausgeben -> da wie am ende der lib sind wird die groesse angegeben
 	int Libend = opLib.tellg();
 	
-	cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
+	//cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
 	opLib.seekg(0, opLib.beg);		
 	
 	char* word = new char[Libend];							//source: https://cplusplus.com/reference/istream/istream/seekg/
@@ -192,25 +210,36 @@ string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
 		i++;
 
 	}
-	cout <<endl << row; //Anzahl der Woerter
+	//cout <<endl << row; //Anzahl der Woerter
 	 
 	const int _row = row;			// row als konstante setzen
 	
 	string* allwords = new string [_row];		//string array mit der groessse von der anzahl der reihen
 	
-	const char beg = buffer[i];
 	
-	i = 0;
-	while (buffer[i] != '\n' ) {//pruefen bis wohin noch char ausgegeben werden
-		buffer = buffer++;
-		cout << buffer++ << endl;
-								//naechsten char einlesen und im pointer speichern
+	
 
-		allwords[i] = buffer;	//alle chars zwischen anfang und ende von der Liste, die im pointer gespeichert wurden als string ausgeben
-	}
+	int place = 0;
+	int size=0;
+	
+	int allnum = 0;
+	do {//pruefen bis wohin noch char ausgegeben werden
+		
+		if (buffer[place] == '\n') {
+			cout << buffer[size];
+			CharToString( place,buffer,size	);
+			size = -1;
+		}
+		
 
-	for( int j =0 ; j<_row-1;j++)
-	cout << allwords[j] ;
+
+		    size++;		//naechsten char einlesen und im pointer speichern
+			place++;					//alle chars zwischen anfang und ende von der Liste, die im pointer gespeichert wurden als string ausgeben
+		
+	} while (buffer[place] != NULL);
+
+	
+;
 		//ausgabe der Liste (Debug)
 	/*for (int i = 0; i < Libend; i++)
 		cout << buffer[i];*/
