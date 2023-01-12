@@ -1,5 +1,6 @@
 
 hallo
+bildschirm
 was
 denn
 da
@@ -14,7 +15,6 @@ vene
 wort
 hand
 schlange
-bildschirm
 wieso
 medusa
 okay

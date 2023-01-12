@@ -159,26 +159,7 @@ void AddLib() {																													//DONE!
 		
 }																											//done!
 
-string CharToString( int beg, char* buffer,int size) {
-int sizebuf = size;
 
-	char _buffer[size];
-	cout << '\n' << beg;
-	
-	int i = 0;
-	do {
-		_buffer[i] = buffer[beg];
-
-		i++;
-		beg++;
-
-	} while (buffer[beg] != '\n');
-		
-	cout << _buffer << endl << endl;
-	
-
-	return string{ buffer };
-}
 
 
 
@@ -212,33 +193,44 @@ string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
 	}
 	//cout <<endl << row; //Anzahl der Woerter
 	 
-	const int _row = row;			// row als konstante setzen
 	
-	string* allwords = new string [_row];		//string array mit der groessse von der anzahl der reihen
+	string* allwords = new string [row];		//string array mit der groessse von der anzahl der reihen
 	
 	
 	
 
-	int place = 0;
-	int size=0;
+	int placeInDoc = 0;//Platz im Dokument
+	int sizeOfWord=0;//laenge des Wortes
 	
 	int allnum = 0;
 	do {//pruefen bis wohin noch char ausgegeben werden
 		
-		if (buffer[place] == '\n') {
-			cout << buffer[size];
-			CharToString( place,buffer,size	);
-			size = -1;
+		if (buffer[placeInDoc] == '\n') {
+			
+
+			
+			
+			char* _buffer = new char[sizeOfWord];				//groessse vom Wort zwischenspeicher anpassen auf wort laenge
+
+
+			for (int x = 0; x < sizeOfWord; x++) {
+				_buffer[x] = buffer[placeInDoc - sizeOfWord + x];
+			}
+
+			_buffer[sizeOfWord] = NULL;
+
+			allwords[allnum] = string{ _buffer };				//Speicher alle chars im _buffer als String in allwords ab.
+			sizeOfWord = -1;											// zurueck setzen der Wortlaenge, um von vorne wieder hochzaehlen zu koennen
+
+			//cout <<allwords[allnum] << endl; //moegliche ausgabe des gerade gespeicherten wortes
+			allnum++;
+			
 		}
 		
-
-
-		    size++;		//naechsten char einlesen und im pointer speichern
-			place++;					//alle chars zwischen anfang und ende von der Liste, die im pointer gespeichert wurden als string ausgeben
-		
-	} while (buffer[place] != NULL);
-
-	
+		    sizeOfWord++;		//hochzaehlen der groesse der Woerter			
+			placeInDoc++;	//naechster platz im dokument
+			//cout << endl << size;
+	} while (buffer[placeInDoc] != NULL);
 ;
 		//ausgabe der Liste (Debug)
 	/*for (int i = 0; i < Libend; i++)
@@ -258,29 +250,7 @@ string ReadLibOnlineFast(int num) { //anspielung auf Netflix serie
 
 
 
-//working on it,? 08,01
-void PrintLib() {
-	ifstream lib("Library.txt");		//oeffnen von Library
-	char word;
-	int num=0;
 
-
-	while (lib.get(word)) {
-		
-		
-		cout <<	word ;
-
-	}
-
-
-	cout << "Druecke Enter um fortzufahren..." << endl;
-	cin.ignore();
-
-	
-
-
-	 
-}
 
 	//Interface Lib
 void IntLib() {
@@ -321,7 +291,7 @@ void IntLib() {
 			system("cls"); //wort lib
 			//cout << "1 debug" << endl;
 			//cin.ignore();
-			PrintLib();
+			ReadLibOnlineFast(4);
 
 
 

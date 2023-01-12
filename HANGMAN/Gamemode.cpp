@@ -121,8 +121,8 @@ int main()
 
                
 
-               cout <<  ReadLibOnlineFast(4);
-               // GetWordOnlineFast(hallo, 4);
+               cout <<  ReadLibOnlineFast(10);
+              
                 
                 
                 
