@@ -116,7 +116,8 @@ int main()
                 cout << "hier wird getestet" << endl;
                //cout <<  IsExistWord("nein");
                 //deleteWord();
-              
+               // cout << PrintLibOnlineFast(3);
+
                break;
             
             

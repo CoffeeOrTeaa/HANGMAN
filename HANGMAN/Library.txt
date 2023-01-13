@@ -1,5 +1,4 @@
 
-hallo
 bildschirm
 was
 denn
@@ -8,7 +7,6 @@ los
 heu
 bein
 zeh
-finger
 nagel
 ader
 vene
@@ -28,3 +26,5 @@ galgenmaennchen
 lass
 nein
 kaffee
+
+

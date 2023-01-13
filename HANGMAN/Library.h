@@ -41,10 +41,6 @@ bool IsNotAlph(string word,int wlength) {
 };
 
 
-
-
-
-
 char tolower(char BigL) {
 
 	if (!('a' <= BigL && BigL <= 'z')) {
@@ -86,8 +82,16 @@ int GetLibraryWordAmount() {
 	}
 	//cout <<endl << row; //Anzahl der Woerter
 	
+	delete []word;
+	delete []buffer;
 	return row;
 }
+
+
+
+
+
+
 
 
 //Done 12.01
@@ -102,11 +106,10 @@ string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 	//cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
 	opLib.seekg(0, opLib.beg);
 
-	char* pword = new char[Libend];							//source: https://cplusplus.com/reference/istream/istream/seekg/
 
-	char* pbuffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
+	char* buffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
 
-	opLib.read(pbuffer, Libend);								//fuellen des zwischenspeichers
+	opLib.read(buffer, Libend);								//fuellen des zwischenspeichers
 
 	
 															//gibt anzahl der Woerter aus
@@ -117,7 +120,7 @@ string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 
 	
 
-	string* pallwords = new string[row];		//string array mit der groessse von der anzahl der reihen
+	string* allwords = new string[row];		//string array mit der groessse von der anzahl der reihen
 
 
 
@@ -128,7 +131,7 @@ string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 	int allnum = 0;
 	do {//pruefen bis wohin noch char ausgegeben werden
 
-		if (pbuffer[placeInDoc] == '\n') {
+		if (buffer[placeInDoc] == '\n') {
 
 
 
@@ -137,12 +140,13 @@ string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 
 
 			for (int x = 0; x < sizeOfWord; x++) {
-				_buffer[x] = pbuffer[placeInDoc - sizeOfWord + x];
+				_buffer[x] = buffer[placeInDoc - sizeOfWord + x];
 			}
 
 			_buffer[sizeOfWord] = NULL;
 
-			pallwords[allnum] = string{ _buffer };				//Speicher alle chars im _buffer als String in allwords ab.
+			allwords[allnum] = string{ _buffer };	
+						//Speicher alle chars im _buffer als String in allwords ab.
 			sizeOfWord = -1;											// zurueck setzen der Wortlaenge, um von vorne wieder hochzaehlen zu koennen
 
 			//cout <<allwords[allnum] << endl; //moegliche ausgabe des gerade gespeicherten wortes
@@ -153,23 +157,29 @@ string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 		sizeOfWord++;		//hochzaehlen der groesse der Woerter			
 		placeInDoc++;	//naechster platz im dokument
 		//cout << endl << size;
-	} while (pbuffer[placeInDoc] != NULL);
+	} while (buffer[placeInDoc] != NULL);
 	;
 	//ausgabe der Liste (Debug)
 /*for (int i = 0; i < Libend; i++)
 	cout << buffer[i];*/
 
 	
-
+	delete[]buffer;
+	
 
 	opLib.close();
-	return pallwords[num];
+	return allwords[num];
 }
+
+
+
+
+
 
 // working on it																						!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 bool IsExistWord(string word) {
 
-	cout << "is exist" << endl;
+
 	int sizeLib = GetLibraryWordAmount();
 	string* allw = new string[sizeLib];
 
@@ -295,12 +305,14 @@ void deleteWord( ) {
 
 	int _sizeLib = GetLibraryWordAmount();
 	
+
 	string* allw = new string[_sizeLib];
 
 
-	for (int i = 0; i < _sizeLib; i++)
+	for (int i = 0; i < _sizeLib; i++) {
 		allw[i] = PrintLibOnlineFast(i);
-
+		//cout << allw[i];
+	}
 	
 	
 	cout << "Gebe das zu loeschende Wort ein: " << endl;
@@ -325,7 +337,7 @@ void deleteWord( ) {
 			if (wdel != allw[i]) {
 
 				buffer[j] = allw[i];
-				
+				j++;
 			}
 
 			
@@ -338,8 +350,8 @@ void deleteWord( ) {
 
 		}
 		
-		
-		
+		/**for (int i = 0; i < _sizeLib; i++)
+			cout << buffer[i] << endl;*/
 
 			ofstream opLib("Library.txt");
 			for (int i = 0; i < _sizeLib; i++)
