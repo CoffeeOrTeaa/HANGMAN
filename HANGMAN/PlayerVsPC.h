@@ -175,49 +175,7 @@ void PlayerVsPC(string randword) {
 
 		
 		cout << " \n Benutzte Buchstaben: "<< usedLtr << "\n";
-		/*
-
-		for (int i = 0; i < randword.length(); i++) {
-
-			if (usedLtr[] == input[i]) {
-
-				used = true;
-			}
-		}
-
-		if (used == true) {
-			cout << " Dieser Buchstabe wurde schon benutzt!" << endl;
-		}
-
-		else if (used == false) {
-			usedLtr[usenum++] = input;
-
-		//wort checken
-			for (int i = 0; i < randword.length(); i++) {
-				//bei richtig raten
-				if (input == wrdletter[i]) {
-					censWord[i] = wrdletter[i];
-					cout << "Du hast richtig geraten!";
-
-				}
-
-				else if (censWord == wrdletter) {
-					cout << " Du hast das Wort erraten! \n" << " Das Wort lautete: " << censWord;
-					return;
-					break;
-				}
-
-
-				else
-					cout << " Der Buchstabe ist leider nicht enthalten! " << endl;
-		}
-
-
-
-		}
-
-
-		*/
+		
 
 		cout << "Versuche: " << 10-guess << "\n"<<  "__________________________________________________________________________________ \n";
 
