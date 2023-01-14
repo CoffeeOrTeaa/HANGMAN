@@ -117,7 +117,10 @@ int main()
             //case um funktionen zu testen
            case 6:
                 cout << "hier wird getestet" << endl;
-               //cout <<  IsExistWord("nein");
+               cout <<  IsLetterInWord('a', "strand");
+                
+                
+                //cout <<  IsExistWord("nein");
                 //deleteWord();
                // cout << PrintLibOnlineFast(3);
 

@@ -6,6 +6,7 @@
 #include <ctime>
 #include <string>
 
+
 using namespace std;
 
 //von 10 runterzaehlen -> 10 ist noch nix
@@ -132,7 +133,8 @@ void HangPic(int guess) {
 		cout << "|          / \\       " << endl;
 		cout << "|                    " << endl;
 		cout << "|=================   " << endl;
-		guess = -1;
+		
+
 		break;
 	}
 	default:
@@ -160,6 +162,17 @@ string RandWord() {
 }
 
 
+bool IsLetterInWord(char input, string word) {
+
+	for (int i = 0; i < word.length(); i++) {
+		if (input == word[i])
+			return true;
+
+	}
+
+	return false;
+
+}
 
 
 

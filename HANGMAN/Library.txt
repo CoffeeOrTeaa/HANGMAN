@@ -21,7 +21,7 @@ arte
 flasche
 kirsche
 universitaet
-Frau
+frau
 galgenmaennchen
 lass
 nein
