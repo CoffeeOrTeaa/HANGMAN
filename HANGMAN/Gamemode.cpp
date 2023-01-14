@@ -15,6 +15,7 @@
 #include "Library.h"
 #include "PlayerVsPlayer.h"
 #include "PlayFunc.h"
+#include "PlayerVsPc.h"
 using namespace std;
 
 
@@ -89,8 +90,10 @@ int main()
 
             case 2:
                 system("cls");
-                 cout << "2 funyt" << endl;
-                //Aufruf der cpp von Spieler gegen PC
+                 PlayerVsPC(RandWord());
+                 
+
+
                 break;
 
             case 3:
@@ -117,6 +120,12 @@ int main()
                //cout <<  IsExistWord("nein");
                 //deleteWord();
                // cout << PrintLibOnlineFast(3);
+
+                /**for (int i = 0; i < 20; i++) {
+                    cout << RandWord();
+                    cin.ignore();
+                }*/
+                 
 
                break;
             

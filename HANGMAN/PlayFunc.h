@@ -148,18 +148,19 @@ string RandWord() {
 
 	string rword;
 	srand(time(NULL));
-	ifstream Libopen;
-		
-		
-	Libopen.open("Library.txt");
 
-	for (int i = 0; i < 9; i++) {
-		
+	int randnum = rand() % (GetLibraryWordAmount() - 1);
+	rword = PrintLibOnlineFast(randnum + 1);
+
+	
+	if (rword == "\n") {
+		RandWord();
 	}
-
-
 	return rword;
 }
+
+
+
 
 
 
