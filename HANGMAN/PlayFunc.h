@@ -5,6 +5,7 @@
 #include <fstream>
 #include <ctime>
 #include <string>
+#include "Library.h"
 
 
 using namespace std;
@@ -133,8 +134,7 @@ void HangPic(int guess) {
 		cout << "|          / \\       " << endl;
 		cout << "|                    " << endl;
 		cout << "|=================   " << endl;
-		
-
+		guess = -1;
 		break;
 	}
 	default:
@@ -161,8 +161,7 @@ string RandWord() {
 	return rword;
 }
 
-
-bool IsLetterInWord(char input, string word) {
+ bool IsLetterInWord(char input, string word) {
 
 	for (int i = 0; i < word.length(); i++) {
 		if (input == word[i])

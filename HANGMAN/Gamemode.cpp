@@ -14,8 +14,9 @@
 #include <windows.h>
 #include "Library.h"
 #include "PlayerVsPlayer.h"
-#include "PlayFunc.h"
 #include "PlayerVsPc.h"
+#include "PlayFunc.h"
+
 using namespace std;
 
 
@@ -77,8 +78,7 @@ int main()
 
             case 1:
                 system("cls");
-                cout << "1 debug" << endl;
-                
+                PlayerVsPLayer();
 
 
 
@@ -90,7 +90,7 @@ int main()
 
             case 2:
                 system("cls");
-                 PlayerVsPC(RandWord());
+                PlayerVsPC(RandWord());
                  
 
 

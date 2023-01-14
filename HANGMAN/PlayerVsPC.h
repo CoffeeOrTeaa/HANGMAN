@@ -5,19 +5,14 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+//#include "Library.h"
+
+
 
 
 using namespace std;
 
-char tolower2(char BigL) {
 
-	if (!('a' <= BigL && BigL <= 'z')) {
-		BigL = BigL + ('z' - 'Z');
-
-	}
-
-	return BigL;
-}
 
 
 void PlayerVsPC(string randword) {
@@ -61,7 +56,7 @@ void PlayerVsPC(string randword) {
 
 
 	string input;
-	char usedLtr[26] = {'.'};
+	char usedLtr[26] = { '.' };
 	int usenum = 0;
 	bool used = false;
 
@@ -73,7 +68,7 @@ void PlayerVsPC(string randword) {
 	//random player begins
 	srand(time(NULL));
 	int PlTurn = rand() % numPLayers;
-	int guess = 9;
+	int guess = 10;
 
 
 
@@ -88,7 +83,7 @@ void PlayerVsPC(string randword) {
 
 		if (PlTurn == numPLayers) {
 			PlTurn = 0;
-			
+
 		}
 		cout << allplayers[PlTurn] << " ist dran! \n";
 
@@ -96,8 +91,8 @@ void PlayerVsPC(string randword) {
 
 		cout << " Gebe einen Buchstaben oder das Wort ein: ";
 		cin >> input;
-		for (int i = 0; i < input.length(); i++) 
-			input[i] = tolower2(input[i]);
+		for (int i = 0; i < input.length(); i++)
+			input[i] = tolower(input[i]);
 
 
 		cout << "\n";
@@ -111,7 +106,7 @@ void PlayerVsPC(string randword) {
 
 			if (input == randword) {
 				cout << " Du hast das Wort erraten! " << "\n" << " Ich bin stolz auf dich " << allplayers[PlTurn] << "! ... aber jemand anders waere schneller gewesen... \n";
-				
+
 				return;
 
 			}
@@ -128,7 +123,7 @@ void PlayerVsPC(string randword) {
 					cout << " Dieser Buchstabe wurde schon benutzt... wow..." << "\n";
 					used = true;
 					break;
-					
+
 				}
 
 
@@ -143,28 +138,28 @@ void PlayerVsPC(string randword) {
 					if (input[0] == wrdletter[i])
 						censWord[i] = wrdletter[i];
 
-					
+
 				}
-			
+
 
 			}
 
-			
+
 
 			else if (IsLetterInWord(input[0], randword) == false && used == false) {
 				usedLtr[usenum++] = input[0];
 				usedLtr[usenum + 1] = '\n';
-				
+
 				cout << " Der Buchstabe ist NICHT im Wort. Too bad..." << "\n";
 
 				guess--;
-				
+
 
 
 			}
 
 
-			
+
 		}
 
 		if (censWord == randword) {
@@ -173,20 +168,20 @@ void PlayerVsPC(string randword) {
 
 		HangPic(guess);
 
-		
-		cout << " \n Benutzte Buchstaben: "<< usedLtr << "\n";
-		
 
-		cout << "Versuche: " << 10-guess << "\n"<<  "__________________________________________________________________________________ \n";
+		cout << " \n Benutzte Buchstaben: " << usedLtr << "\n";
 
 
+		cout << "Versuche: " << 10 - guess << "\n" << "__________________________________________________________________________________ \n";
 
-		
 
-	
 
-		if (guess == -1) {
-			
+
+
+
+
+		if (guess == 0) {
+
 			cout << " Und du hast Sie/Ihn umgebracht.. Na Toll... \n";
 			break;
 		}
@@ -201,10 +196,10 @@ void PlayerVsPC(string randword) {
 
 
 
-	
 
-	
-	
+
+
+
 
 
 
