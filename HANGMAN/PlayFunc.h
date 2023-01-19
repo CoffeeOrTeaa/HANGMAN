@@ -173,7 +173,7 @@ string RandWord() {
 
 }
 
-
+ void Replay(string c);
 
 
 //spieleranzahl / durchwechseln			--max anzahl ist 10 da es nur so viele zuege gibt

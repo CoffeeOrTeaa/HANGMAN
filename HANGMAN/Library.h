@@ -256,9 +256,8 @@ void AddToLib() {																													//DONE!
 					
 					for (int j = 0; j < word.length(); j++) {																				//das  Wort soll nur in lower case gespeichert werden. Deshalb wird jeder buchstabe um string durchgegangen um ihn zu testen ung ggbf zu konvertieren
 
-						word[j] = tolower(word[j]);																						//tolower ist eine funktion aus der lib cctype. Man haette es mit ascii code loesen koennen aber das ist eleganter
-																																		//source https://cplusplus.com/reference/locale/tolower/
-
+						word[j] = tolower(word[j]);		
+						
 					}
 					lib << word << endl;																					//abspeicherung des Wortes 
 

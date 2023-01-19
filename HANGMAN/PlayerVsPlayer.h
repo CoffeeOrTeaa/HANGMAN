@@ -16,21 +16,18 @@ bool IsLetterInWord(char input, string word);
 void HangPic(int guess);
 
 
-inline void PlayerVsPLayer() {
+ inline void PlayerVsPLayer() {
+
+	 ofstream replay("Replay.txt");
+
 
 	string word;
-	cout << " Spieleleiter, gebe das Wort ein... \n";
 
-	cin >> word;
 
 
 	char* wrdletter = new char[word.length()];
 
-	for (int i = 0; i < word.length(); i++) {
-		wrdletter[i] = word[i];
-		wrdletter[i + 1] = '\0';
-	}
-
+	
 	//Playercount
 	int numPLayers;
 
@@ -38,9 +35,11 @@ inline void PlayerVsPLayer() {
 
 	cin >> numPLayers;
 
+	
 
 	string* allplayers = new string[numPLayers];
 
+	replay << " Mitspielende Spieler: \n \r ";
 
 	//safe all players in string array
 	for (int i = 0; i < numPLayers; i++) {
@@ -49,8 +48,61 @@ inline void PlayerVsPLayer() {
 		cin >> allplayers[i];
 
 		cout << "\n";
+
+		replay << allplayers[i] << "\r";
 	}
 
+	replay << "\n";
+	
+
+	
+
+
+
+	//random player begins
+	srand(time(NULL));
+	int PlTurn = rand() % numPLayers;
+	
+	
+	
+	int guess = 10;
+
+	cout << allplayers[PlTurn] << " ist der Spielleiter \n" << "Gebe ein Wort ein, die anderen duerfen nicht gucken!!! \n";
+	
+
+
+
+	cin >> word;
+
+	replay << allplayers[PlTurn] << " ist der Spielleiter geworden und hat das folgende Wort ausgesucht: " << word << "\n";
+	
+	system("cls");
+	for (int i = 0; i < word.length(); i++) {
+		wrdletter[i] = word[i];
+		wrdletter[i + 1] = '\0';
+	}
+
+
+
+	int j = 0;
+	for (int i = 0; i < numPLayers ; i++) {
+		
+		if (allplayers[i] != allplayers[PlTurn])
+			allplayers[j++] = allplayers[i];
+
+
+
+	}
+
+	numPLayers = numPLayers -1;
+	PlTurn = rand() % numPLayers;
+	
+	//cout << word << "\n";
+
+	string input;
+	char usedLtr[26] = { '.' };
+	int usenum = 0;
+	bool used = false;
 
 	//erstelle zensiertes Array das ausgegeben wird
 	char* censWord = new char[word.length()];
@@ -58,26 +110,6 @@ inline void PlayerVsPLayer() {
 		censWord[i] = '*';
 		censWord[i + 1] = '\0';
 	}
-
-
-
-
-	string input;
-	char usedLtr[26] = { '.' };
-	int usenum = 0;
-	bool used = false;
-
-
-	cout << word << "\n";
-
-
-
-	//random player begins
-	srand(time(NULL));
-	int PlTurn = rand() % numPLayers;
-	int guess = 10;
-
-
 
 
 
@@ -93,7 +125,7 @@ inline void PlayerVsPLayer() {
 
 		}
 		cout << allplayers[PlTurn] << " ist dran! \n";
-
+		replay << allplayers[PlTurn] << " ist dran! \n";
 
 
 		cout << " Gebe einen Buchstaben oder das Wort ein: ";
@@ -101,6 +133,7 @@ inline void PlayerVsPLayer() {
 		for (int i = 0; i < input.length(); i++)
 			input[i] = tolower(input[i]);
 
+		replay << allplayers[PlTurn] << " hat den Buchstaben " << input << " ausgesucht!";
 
 		cout << "\n";
 
@@ -113,13 +146,17 @@ inline void PlayerVsPLayer() {
 
 			if (input == word) {
 				cout << " Du hast das Wort erraten! " << "\n" << " Ich bin stolz auf dich " << allplayers[PlTurn] << "! ... aber jemand anders waere schneller gewesen... \n";
+				replay << allplayers[PlTurn] << " \n ist eine lebende Legende, du hast gewonnen! \n \0";
 
 				return;
 
 			}
 
-			else
+			else {
 				cout << " Das Wort stimmt leider nicht.... Too bad." << "\n";
+				guess--;
+				replay << " Haha das Wort war falsch. \n";
+			}
 		}
 
 
@@ -130,6 +167,7 @@ inline void PlayerVsPLayer() {
 					cout << " Dieser Buchstabe wurde schon benutzt... wow..." << "\n";
 					used = true;
 					break;
+					replay << " Wow.. der Buchstabe war schon dran, streng dich an " << allplayers[PlTurn] << "! \n";
 
 				}
 
@@ -139,15 +177,18 @@ inline void PlayerVsPLayer() {
 
 
 			if (IsLetterInWord(input[0], word) == true && used == false) {
+			
+				
 				cout << " Der Buchstabe ist im Wort!" << "\n";
 				usedLtr[usenum++] = input[0];
 				for (int i = 0; i < word.length(); i++) {
 					if (input[0] == wrdletter[i])
 						censWord[i] = wrdletter[i];
 
-
+					
 				}
 
+				replay << allplayers[PlTurn] << "! Dank dir machen wir hier forschritte. \n Der richtige Buchstabe war: " << input << "\n";
 
 			}
 
@@ -158,7 +199,7 @@ inline void PlayerVsPLayer() {
 				usedLtr[usenum + 1] = '\n';
 
 				cout << " Der Buchstabe ist NICHT im Wort. Too bad..." << "\n";
-
+				replay << " Hahaha, der Buchstabe ist falsch.\n";
 				guess--;
 
 
@@ -169,23 +210,30 @@ inline void PlayerVsPLayer() {
 
 		}
 
-		if (censWord == word) 
-			cout << "Ach kommt schon leute, es steht doch schon da..." << "\n";
-			
+		if (censWord == word)
+			cout << " Ach kommt schon leute, es steht doch schon da..." << "\n";
+		replay << " Das. Das war einfach nur peinlich.... \n";
+
 		HangPic(guess);
+		
+		
+
+
 
 		if (guess == 0) {
 
 			cout << " Und du hast Sie/Ihn umgebracht.. Na Toll... \n";
+			replay << allplayers[PlTurn] << " hat sie/ihn umgebracht... endlich ist es vorbei. \n \0";
 			break;
 		}
 		
 
 			cout << " \n Benutzte Buchstaben: " << usedLtr << "\n";
+			replay << "\n Eure falsch geratenen Buchstaben :) " << usedLtr;
 
-			cout << "Versuche: " << 10 - guess << "\n" << "__________________________________________________________________________________ \n";
+			cout << "Versuche: " << guess << "\n" << "__________________________________________________________________________________ \n";
 
-
+			replay << guess << "\n Versuche habt ihr noch.. \n";
 
 
 
