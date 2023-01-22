@@ -28,7 +28,7 @@ bool IsNotAlph(string word,int wlength) {
 		if (!( 'a' <= word[i] && word[i] <= 'z') && !('A' <= word[i] && word[i] <= 'Z'))
 		{
 
-			cerr << " Nummern sind in Woertern nicht erlaubt... Warum tust du das?" << endl << " Dein Wort lautet:" << word << endl;
+			cout	 << " Nummern sind in Woertern nicht erlaubt... Warum tust du das?" << endl << " Dein Wort lautet:" << word << endl;
 			
 			return true;
 
@@ -63,7 +63,7 @@ int GetLibraryWordAmount() {
 	//cout << "groessse" << Libend << endl;					//groessse der Lib  ausgeben, fuer debug
 	opLib.seekg(0, opLib.beg);
 
-	char* word = new char[Libend];							//source: https://cplusplus.com/reference/istream/istream/seekg/
+	
 
 	char* buffer = new char[Libend];						//zwisvhenspeicher zur weitergabe d woerter
 
@@ -82,7 +82,7 @@ int GetLibraryWordAmount() {
 	}
 	//cout <<endl << row; //Anzahl der Woerter
 	
-	delete []word;
+	opLib.close();
 	delete []buffer;
 	return row;
 }
@@ -95,7 +95,7 @@ int GetLibraryWordAmount() {
 
 
 //Done 12.01
-string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
+string PrintLibFast(int num) { //anspielung auf Netflix serie
 	ifstream opLib("Library.txt");
 
 	//an das ende der Lib gehen
@@ -156,12 +156,11 @@ string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 
 		sizeOfWord++;		//hochzaehlen der groesse der Woerter			
 		placeInDoc++;	//naechster platz im dokument
-		//cout << endl << size;
+	
 	} while (buffer[placeInDoc] != NULL);
-	;
-	//ausgabe der Liste (Debug)
-/*for (int i = 0; i < Libend; i++)
-	cout << buffer[i];*/
+	
+	
+
 
 	
 	delete[]buffer;
@@ -176,15 +175,17 @@ string PrintLibOnlineFast(int num) { //anspielung auf Netflix serie
 
 
 
-// working on it																						!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// done 12.09																					!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 bool IsExistWord(string word) {
 
 
 	int sizeLib = GetLibraryWordAmount();
 	string* allw = new string[sizeLib];
+	
 
+	//fuelle ein array mit allen woertern
 	for (int i = 0; i < sizeLib; i++)
-		allw[i] = PrintLibOnlineFast(i);
+		allw[i] = PrintLibFast(i);
 
 
 
@@ -241,8 +242,6 @@ void AddToLib() {																													//DONE!
 				
 				if (IsNotAlph(word,word.length())==true || IsExistWord(word) == true)                                                                                   //NumTestet auf nummern, und so wird entschieden ob der cin komplett gecleared werden muss oder nur der Buffer entleert. 
 				{
-					cin.clear(); // macht error flag weg, wenn die Flag auf falschs steh dann funktioniert cin nicht mehr richtig
-					cin.ignore((numeric_limits<streamsize>::max)(), '\n'); // macht den buffer frei
 					cerr << " Oops Benutze bitte keine Zahlen in diesem Menu. Druecke Enter um fortzufahren..." << endl;
 					cin.ignore();
 					
@@ -251,8 +250,7 @@ void AddToLib() {																													//DONE!
 				}
 				else
 				{
-					//cleared buffer zur sicherheit
-					cin.ignore((numeric_limits<streamsize>::max)(), '\n');// macht den buffer frei
+					
 					
 					for (int j = 0; j < word.length(); j++) {																				//das  Wort soll nur in lower case gespeichert werden. Deshalb wird jeder buchstabe um string durchgegangen um ihn zu testen ung ggbf zu konvertieren
 
@@ -265,20 +263,6 @@ void AddToLib() {																													//DONE!
 
 				}
 
-			
-				
-
-
-			
-
-
-
-
-		
-
-
-
-			
 
 
 		} while (word != "!");																									
@@ -309,7 +293,7 @@ void deleteWord( ) {
 
 
 	for (int i = 0; i < _sizeLib; i++) {
-		allw[i] = PrintLibOnlineFast(i);
+		allw[i] = PrintLibFast(i);
 		//cout << allw[i];
 	}
 	
@@ -339,18 +323,11 @@ void deleteWord( ) {
 				j++;
 			}
 
-			
-
-			
-			
-
-
-
+		
 
 		}
 		
-		/**for (int i = 0; i < _sizeLib; i++)
-			cout << buffer[i] << endl;*/
+		
 
 			ofstream opLib("Library.txt");
 			for (int i = 0; i < _sizeLib; i++)
@@ -381,7 +358,7 @@ void deleteWord( ) {
 	//Interface Lib
 void IntLib() {
 
-	int mode;
+	char mode;
 
 	int sizeLib;
 	string* allwords;
@@ -402,27 +379,16 @@ void IntLib() {
 
 
 
-		if (!cin)                                                                                   //wenn invalid input, dann clear cin buffer clearen / zwischengespeicherte Inputs
-		{
-			cin.clear();
-			cin.ignore((numeric_limits<streamsize>::max)(), '\n');
-			cerr << " Oops Benutze bitte nur korrespondierende Zahlen in diesem Menu" << endl;
-		}
-		else
-		{
-			cin.ignore((numeric_limits<streamsize>::max)(), '\n');                                  //cleared buffer zur sicherheit
-		}
-
 
 		switch (mode) {
 
-		case 1://Lib Anzeigen
+		case '1'://Lib Anzeigen
 			
 			sizeLib = GetLibraryWordAmount();
 			allwords = new string[sizeLib];
 		
 			for (int i = 0; i < sizeLib; i++)
-				allwords[i] = PrintLibOnlineFast(i);
+				allwords[i] = PrintLibFast(i);
 
 			system("cls"); 
 
@@ -432,13 +398,13 @@ void IntLib() {
 				cout << i << ". "<< allwords[i] << endl;
 			
 			
-			cout << " Druecke Enter um Fortzufahren.." << endl;
+			cout << " Druecke Enter zum Fortzufahren.." << endl;
 			cin.ignore();
 
 
 			break;
 
-		case 2://WortHinzufuegen
+		case '2'://WortHinzufuegen
 			system("cls");
 			AddToLib();
 
@@ -446,7 +412,7 @@ void IntLib() {
 			
 			break;
 
-		case 3:// wort entfernen
+		case '3':// wort entfernen
 			system("cls");
 			deleteWord();
 
@@ -475,7 +441,7 @@ void IntLib() {
 
 
 
-	} while (mode != 4);                                                                            // Beende Programm wenn 4 eingegeben wird
+	} while (mode != '4');                                                                            // Beende Programm wenn 4 eingegeben wird
 
 
 }

@@ -152,7 +152,7 @@ string RandWord() {
 	srand(time(NULL));
 
 	int randnum = rand() % (GetLibraryWordAmount() - 1);
-	rword = PrintLibOnlineFast(randnum + 1);
+	rword = PrintLibFast(randnum + 1);
 
 	
 	if (rword == "\n") {
@@ -173,15 +173,11 @@ string RandWord() {
 
 }
 
- void Replay(string c);
 
 
-//spieleranzahl / durchwechseln			--max anzahl ist 10 da es nur so viele zuege gibt
 
-//wort check
 
-//wortauswahl - working on it
 
-//spieler kann wort festlegen
+
 
 //wiedergabe vim spiel -- buchstaben und zuege koennen in einem array gespeichert werden

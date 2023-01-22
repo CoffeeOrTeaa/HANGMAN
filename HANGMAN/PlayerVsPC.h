@@ -17,12 +17,21 @@ using namespace std;
 
 void PlayerVsPC(string randword) {
 
-	char* wrdletter = new char[randword.length()];
+	char* wrdletter = new char[randword.length()]; //char array mit groessse von weitergegebenen string
 
 	for (int i = 0; i < randword.length(); i++) {
 		wrdletter[i] = randword[i];
 		wrdletter[i + 1] = '\0';
 	}
+
+
+	//erstelle zensiertes Array das ausgegeben wird
+	char* censWord = new char[randword.length()];
+	for (int i = 0; i < randword.length(); i++) {
+		censWord[i] = '*';
+		censWord[i + 1] = '\0';
+	}
+
 
 	//Playercount
 	int numPLayers;
@@ -35,6 +44,8 @@ void PlayerVsPC(string randword) {
 	string* allplayers = new string[numPLayers];
 
 
+
+
 	//safe all players in string array
 	for (int i = 0; i < numPLayers; i++) {
 		cout << " Gebe einen Namen ein:";
@@ -45,12 +56,7 @@ void PlayerVsPC(string randword) {
 	}
 
 
-	//erstelle zensiertes Array das ausgegeben wird
-	char* censWord = new char[randword.length()];
-	for (int i = 0; i < randword.length(); i++) {
-		censWord[i] = '*';
-		censWord[i + 1] = '\0';
-	}
+	
 
 
 
@@ -61,13 +67,13 @@ void PlayerVsPC(string randword) {
 	bool used = false;
 
 
-	cout << randword << "\n";
+	//cout << randword << "\n";
 
 
 
 	//random player begins
 	srand(time(NULL));
-	int PlTurn = rand() % numPLayers;
+	int PlTurn = rand() % numPLayers; 
 	int guess = 10;
 
 

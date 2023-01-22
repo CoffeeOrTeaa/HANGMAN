@@ -49,10 +49,12 @@ int main()
 
 
 
-    
-    
-    
-    int gamemode;
+    ifstream replay("Replay.txt");
+
+    int replend;
+    char* game;
+    int replaynum;
+    char gamemode;
     do {
         cout << endl << "Bitte waehle den Spielmodus aus" << endl <<
             " 1. Spieler gegen Spieler" << endl <<
@@ -62,41 +64,73 @@ int main()
 
 
         cin >> gamemode;
-        if (!cin)                                                                                   //wenn invalid input, dann clear cin buffer clearen / zwischengespeicherte Inputs
-        {
-            cin.clear();
-            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
-            cerr << " Oops Benutze bitte nur korrespondierende Zahlen in diesem Menu" << endl;
-        }
-        else
-        {
-            cin.ignore((numeric_limits<streamsize>::max)(), '\n');                                  //cleared buffer zur sicherheit
-        }
+       
     
 
             switch (gamemode) {
 
-            case 1:
+            case '1':
                 system("cls");
                 PlayerVsPLayer();
 
+                cout << " wollt ihr die wiederholung vom Spiel sehen? \n 1. ja \n 2. nein \n";
+                  
+                cin >> replaynum;
+                    
+                if (replaynum == 1) {
+                    
+
+                    replay.seekg(0, replay.end);
+
+                    replend = replay.tellg();
+                    replay.seekg(0, replay.beg);
 
 
+                    cout << replend;
+                    game = new char[replend];
+
+                    replay.read(game, replend);
+
+
+                    cout << game << endl;
+
+                }
+                replay.close();
 
 
 
                 //Aufruf von Spieler gegen Spieler cpp
                 break;
 
-            case 2:
+            case '2':
                 system("cls");
                 PlayerVsPC(RandWord());
-                 
+               
+                cin >> replaynum;
+                if (replaynum == 1) {
 
+
+                    replay.seekg(0, replay.end);
+
+                    replend = replay.tellg();
+                    replay.seekg(0, replay.beg);
+
+
+                    cout << replend;
+                    game = new char[replend];
+
+                    replay.read(game, replend);
+
+
+                    cout << game << endl;
+                   
+
+                }
+                replay.close();
 
                 break;
 
-            case 3:
+            case '3':
                 system("cls");
              
                 IntLib();
@@ -106,7 +140,7 @@ int main()
 
                 break;
 
-            case 4:
+            case '4':
                 system("cls");
                 cout << "Beende Spiel" << endl;  //Beendet das Spiel
                 break;
@@ -115,21 +149,31 @@ int main()
 
            
             //case um funktionen zu testen
-           case 6:
+           case '6':
                 cout << "hier wird getestet" << endl;
-               cout <<  IsLetterInWord('a', "strand");
+              
+                
+                cout << GetLibraryWordAmount();
+                /**
+                
+                replay.seekg(0, replay.end);
+
+                replend = replay.tellg();
+                replay.seekg(0, replay.beg);
+
+
+                cout << replend;
+                game = new char[replend];
+
+                replay.read(game, replend);
+
+               
+                    cout <<  game     << endl;
                 
                 
-                //cout <<  IsExistWord("nein");
-                //deleteWord();
-               // cout << PrintLibOnlineFast(3);
+                    replay.close();
 
-                /**for (int i = 0; i < 20; i++) {
-                    cout << RandWord();
-                    cin.ignore();
-                }*/
-                 
-
+                    */
                break;
             
             
@@ -148,7 +192,7 @@ int main()
 
 
 
-        } while (gamemode != 4);                                                                            // Beende Programm wenn 4 eingegeben wird
+        } while (gamemode != '4');                                                                            // Beende Programm wenn 4 eingegeben wird
 
 
     }
