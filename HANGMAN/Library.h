@@ -259,7 +259,7 @@ void AddToLib() {																													//DONE!
 					}
 					lib << word << endl;																					//abspeicherung des Wortes 
 
-
+					cout << " Wort wurde gespeichert... \n";
 
 				}
 
@@ -294,9 +294,9 @@ void deleteWord( ) {
 
 	for (int i = 0; i < _sizeLib; i++) {
 		allw[i] = PrintLibFast(i);
-		//cout << allw[i];
+		cout << allw[i] << endl;
 	}
-	
+	//cout << allw << endl;
 	
 	cout << "Gebe das zu loeschende Wort ein: " << endl;
 	cin >> wdel;

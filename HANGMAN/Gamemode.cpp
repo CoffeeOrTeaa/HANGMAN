@@ -49,7 +49,7 @@ int main()
 
 
 
-    ifstream replay("Replay.txt");
+
 
     int replend;
     char* game;
@@ -78,7 +78,7 @@ int main()
                 cin >> replaynum;
                     
                 if (replaynum == 1) {
-                    
+                    ifstream replay("Replay.txt");
 
                     replay.seekg(0, replay.end);
 
@@ -93,9 +93,9 @@ int main()
 
 
                     cout << game << endl;
-
+                    replay.close();
                 }
-                replay.close();
+                
 
 
 
@@ -105,16 +105,16 @@ int main()
             case '2':
                 system("cls");
                 PlayerVsPC(RandWord());
-               
+                cout << " wollt ihr die wiederholung vom Spiel sehen? \n 1. ja \n 2. nein \n";
                 cin >> replaynum;
                 if (replaynum == 1) {
+                    ifstream replay("Replay.txt");
 
-
-                    replay.seekg(0, replay.end);
+                   
+                        replay.seekg(0, replay.end);
 
                     replend = replay.tellg();
                     replay.seekg(0, replay.beg);
-
 
                     cout << replend;
                     game = new char[replend];
@@ -123,10 +123,10 @@ int main()
 
 
                     cout << game << endl;
-                   
+                    replay.close();
 
                 }
-                replay.close();
+                
 
                 break;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <iostream>
+
 #include <fstream>
 #include <string>
 #include <ctime>
@@ -16,6 +16,7 @@ using namespace std;
 
 
 void PlayerVsPC(string randword) {
+	ofstream replay("Replay.txt");
 
 	char* wrdletter = new char[randword.length()]; //char array mit groessse von weitergegebenen string
 
@@ -39,23 +40,23 @@ void PlayerVsPC(string randword) {
 	cout << "Wie viele Spieler wollen mitspielen?" << endl;
 
 	cin >> numPLayers;
-
+	
 
 	string* allplayers = new string[numPLayers];
 
 
 
-
+	replay << " Mitspielende Spieler: \n \r " << endl;
 	//safe all players in string array
 	for (int i = 0; i < numPLayers; i++) {
 		cout << " Gebe einen Namen ein:";
 
 		cin >> allplayers[i];
-
+		replay << allplayers[i] << "\r" << endl;
 		cout << "\n";
 	}
 
-
+	replay << endl;
 	
 
 
@@ -92,7 +93,7 @@ void PlayerVsPC(string randword) {
 
 		}
 		cout << allplayers[PlTurn] << " ist dran! \n";
-
+		replay << allplayers[PlTurn] << " ist dran! \n";
 
 
 		cout << " Gebe einen Buchstaben oder das Wort ein: ";
@@ -100,7 +101,7 @@ void PlayerVsPC(string randword) {
 		for (int i = 0; i < input.length(); i++)
 			input[i] = tolower(input[i]);
 
-
+		replay << allplayers[PlTurn] << " hat den Buchstaben " << input << " ausgesucht!" << endl;
 		cout << "\n";
 
 
@@ -112,13 +113,17 @@ void PlayerVsPC(string randword) {
 
 			if (input == randword) {
 				cout << " Du hast das Wort erraten! " << "\n" << " Ich bin stolz auf dich " << allplayers[PlTurn] << "! ... aber jemand anders waere schneller gewesen... \n";
-
+				replay << "  \n" << allplayers[PlTurn] << " ist eine lebende Legende, du hast gewonnen!" << NULL;
+				replay.close();
 				return;
 
 			}
 
-			else
+			else {
 				cout << " Das Wort stimmt leider nicht.... Too bad." << "\n";
+				replay << " Haha das Wort war falsch." << endl; 
+				guess--;
+			}
 		}
 
 
@@ -128,6 +133,7 @@ void PlayerVsPC(string randword) {
 				if (usedLtr[i] == input[0]) {
 					cout << " Dieser Buchstabe wurde schon benutzt... wow..." << "\n";
 					used = true;
+					replay << " Wow.. der Buchstabe war schon dran, streng dich an " << allplayers[PlTurn] << "!" << endl;
 					break;
 
 				}
@@ -147,6 +153,7 @@ void PlayerVsPC(string randword) {
 
 				}
 
+				replay << allplayers[PlTurn] << "! Dank dir machen wir hier forschritte. \n Der richtige Buchstabe war: " << input << endl;
 
 			}
 
@@ -158,6 +165,7 @@ void PlayerVsPC(string randword) {
 
 				cout << " Der Buchstabe ist NICHT im Wort. Too bad..." << "\n";
 
+				replay << " Hahaha, der Buchstabe ist falsch." << endl;
 				guess--;
 
 
@@ -178,7 +186,7 @@ void PlayerVsPC(string randword) {
 		cout << " \n Benutzte Buchstaben: " << usedLtr << "\n";
 
 
-		cout << "Versuche: " << 10 - guess << "\n" << "__________________________________________________________________________________ \n";
+		cout << "Versuche: " << guess << "\n" << "__________________________________________________________________________________ \n";
 
 
 
@@ -188,9 +196,14 @@ void PlayerVsPC(string randword) {
 
 		if (guess == 0) {
 
-			cout << " Und du hast Sie/Ihn umgebracht.. Na Toll... \n";
+			replay << allplayers[PlTurn] << " hat sie/ihn umgebracht... endlich ist es vorbei. \n \0" << endl;
+			cout << " Und du hast Sie/Ihn umgebracht.. Na Toll... \n Das Wort war: " << randword << "\n";
+			replay.close();
 			break;
 		}
+
+		replay << guess << "\n Versuche habt ihr noch.. \n" << endl;
+
 		used = false;
 
 		PlTurn++;

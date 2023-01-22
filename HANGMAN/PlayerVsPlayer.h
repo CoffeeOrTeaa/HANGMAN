@@ -168,8 +168,9 @@ void HangPic(int guess);
 				if (usedLtr[i] == input[0]) {
 					cout << " Dieser Buchstabe wurde schon benutzt... wow..." << "\n";
 					used = true;
-					break;
 					replay << " Wow.. der Buchstabe war schon dran, streng dich an " << allplayers[PlTurn] << "!" << endl;
+
+					break;
 
 				}
 
