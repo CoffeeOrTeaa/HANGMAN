@@ -148,34 +148,8 @@ int main()
 
 
            
-            //case um funktionen zu testen
-           case '6':
-                cout << "hier wird getestet" << endl;
-              
-                
-                cout << GetLibraryWordAmount();
-                /**
-                
-                replay.seekg(0, replay.end);
-
-                replend = replay.tellg();
-                replay.seekg(0, replay.beg);
-
-
-                cout << replend;
-                game = new char[replend];
-
-                replay.read(game, replend);
-
-               
-                    cout <<  game     << endl;
-                
-                
-                    replay.close();
-
-                    */
-               break;
-            
+           
+          
             
             default:
                 system("cls");
